@@ -2,6 +2,9 @@ package com.example.projet_java_fullstack.model;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
+
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -14,11 +17,13 @@ public class Order {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_id")
-    private User user;
+    private Users user;
 
     private LocalDateTime orderDate = LocalDateTime.now();
 
-    private double totalAmount;
+    @Column(name = "total_amount", precision = 10, scale = 2, nullable = false)
+    private BigDecimal totalAmount;
+
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status = OrderStatus.PENDING;
@@ -31,7 +36,7 @@ public class Order {
 
     public Order() {}
 
-    public Order(Long id, User user, LocalDateTime orderDate, double totalAmount, OrderStatus status, Product produit, int quantite) {
+    public Order(Long id, Users user, LocalDateTime orderDate, BigDecimal totalAmount, OrderStatus status, Product produit, int quantite) {
         this.id = id;
         this.user = user;
         this.orderDate = orderDate;
@@ -41,26 +46,61 @@ public class Order {
         this.quantite = quantite;
     }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public User getUser() { return user; }
-    public void setUser(User user) { this.user = user; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public LocalDateTime getOrderDate() { return orderDate; }
-    public void setOrderDate(LocalDateTime orderDate) { this.orderDate = orderDate; }
+    public Users getUser() {
+        return user;
+    }
 
-    public double getTotalAmount() { return totalAmount; }
-    public void setTotalAmount(double totalAmount) { this.totalAmount = totalAmount; }
+    public void setUser(Users user) {
+        this.user = user;
+    }
 
-    public OrderStatus getStatus() { return status; }
-    public void setStatus(OrderStatus status) { this.status = status; }
+    public LocalDateTime getOrderDate() {
+        return orderDate;
+    }
 
-    public Product getProduit() { return produit; }
-    public void setProduit(Product produit) { this.produit = produit; }
+    public void setOrderDate(LocalDateTime orderDate) {
+        this.orderDate = orderDate;
+    }
 
-    public int getQuantite() { return quantite; }
-    public void setQuantite(int quantite) { this.quantite = quantite; }
+    public BigDecimal getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(BigDecimal totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public OrderStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OrderStatus status) {
+        this.status = status;
+    }
+
+    public Product getProduit() {
+        return produit;
+    }
+
+    public void setProduit(Product produit) {
+        this.produit = produit;
+    }
+
+    public int getQuantite() {
+        return quantite;
+    }
+
+    public void setQuantite(int quantite) {
+        this.quantite = quantite;
+    }
 }
 
 

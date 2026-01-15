@@ -2,6 +2,9 @@ package com.example.projet_java_fullstack.model;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
+
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -18,8 +21,9 @@ public class Product {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Column(nullable = false)
-    private double price;
+    @Column(name = "price", precision = 10, scale = 2, nullable = false)
+    private BigDecimal price;
+
 
     @ManyToOne
     @JoinColumn(name = "category_id")
@@ -34,7 +38,7 @@ public class Product {
 
     public Product() {}
 
-    public Product(Long id, String name, String description, double price, Categorie category,
+    public Product(Long id, String name, String description, BigDecimal  price, Categorie category,
                    int stockQuantity, LocalDateTime createdAt, String lienImage) {
         this.id = id;
         this.name = name;
@@ -55,8 +59,8 @@ public class Product {
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
-    public double getPrice() { return price; }
-    public void setPrice(double price) { this.price = price; }
+    public BigDecimal getPrice() {return price;}
+    public void setPrice(BigDecimal price) {this.price = price;}
 
     public Categorie getCategory() { return category; }
     public void setCategory(Categorie category) { this.category = category; }
