@@ -44,7 +44,7 @@ public class OrderController {
         order.setProduit(product);
         order.setQuantite(req.quantite);
         order.setStatus(OrderStatus.PENDING);
-        
+
         BigDecimal total = product.getPrice().multiply(BigDecimal.valueOf(req.quantite));
         order.setTotalAmount(total);
 
